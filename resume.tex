@@ -1,0 +1,190 @@
+\documentclass[12pt,letterpaper,oneside]{article}
+
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+  colorlinks = false,
+  pdfborder = {0 0 0},
+}
+\usepackage{url}
+
+\ifx\HCode\undefined
+\usepackage{magic}
+\geometry{hmargin=0.98in} % HACK
+\else
+\def\star#1\par{\begin{itemize}\def\star{\item}\star#1\end{itemize}\par\penalty-1000}
+\def\entry#1{\subsection*{#1}}
+\def\paragraph#1\par{\begin{itemize}\item[]#1\end{itemize}}
+\let\oldsection\section
+\def\section#1{\oldsection*{#1}}
+\fi
+
+\begin{document}
+%\unhide
+
+\def\showheader{}
+
+\ifx\HCode\undefined
+\else
+\let\showheader\undefined
+\def\showlastupdate{}
+\fi
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\showheader\undefined
+\else
+\name
+Simon Benjamin Orion Parent
+
+\begin{center}
+sboparen@gmail.com
+\end{center}
+\fi
+
+\ifx\showlastupdate\undefined
+\else
+Last updated June 2014.
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vskip-0.8em % HACK
+\section{Employment Objective}
+
+\paragraph
+I want to improve people's lives by solving interesting
+and challenging problems.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary of Qualifications}
+
+\star Over twenty years of programming experience with various
+languages and platforms
+\star Adaptive to new problem domains; eager to learn new tools
+and methods
+\star Strong mathematical background
+\star Attentive to detail
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Highlighted Technical Skills}
+
+\star Languages: C, Python, C++,
+  Racket, Assembly (ARM, x86), Shell Scripting, Ruby, Java
+\star Essential Everyday Tools: Linux, GNU Userland, Git, Vim, SSH, \LaTeX
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Education}
+
+\entry{Master of Mathematics
+in Computer Science,
+2014}
+University of Waterloo, Waterloo, Ontario
+\\ Thesis:
+\textit{How Programmers Comment When They Think Nobody's Watching}
+\\ \url{https://sboparen.github.io/commenting/}
+
+\entry{Bachelor of Mathematics, 2010}
+University of Waterloo, Waterloo, Ontario
+\\ Double Honours Co-op: Computer Science and Pure Mathematics
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Co-op Work Experience}
+
+\entry{Video Codec and Hardware Programmer}
+Magnum Semiconductor,
+May 2008 -- August 2008 and January 2009 -- April 2009
+\paragraph
+My main project was the development of
+a reference encoder for the VC-1 video codec standard
+which was designed to exactly match the output of the hardware encoder.
+I assisted in correcting the bugs that were revealed by mismatches
+on test video streams.
+
+\entry{3D Graphics Programmer}
+Side Effects Software,
+January 2007 -- April 2007 and September 2007 -- December 2007
+\paragraph
+My main contribution to the Houdini software was
+major revisions to the algorithms for
+boolean operations on arbitrary surface geometry,
+which improved the numerical stability and
+handling of boundary cases.
+
+\entry{Maintenance Programmer}
+Research In Motion,
+January 2006 -- April 2006
+\paragraph
+As a member of the Customer Response Team,
+I was responsible for fixing bugs in the BlackBerry Enterprise Server
+software and its administrative interface.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Other Experience}
+
+
+
+\entry{Teaching Assistant for Real-Time Programming}
+University of Waterloo,
+September 2010 -- August 2012
+\paragraph
+Beyond the expected duties,
+I used my knowledge from having taken the course
+to revise the stale course material.
+This was especially necessary since the course had recently
+undergone a major overhaul in transitioning from
+x86 to an ARM architecture.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Scholarships and Awards}
+
+\star NSERC Alexander Graham Bell Canada Graduate Scholarship, 2010--2011
+\star David R. Cheriton Graduate Scholarship, 2010--2012
+\star Ontario Graduate Scholarship, 2011--2012
+\star University of Waterloo President's Graduate Scholarship, 2010--2012
+\star NSERC USRA Industrial Grant for Research and Development, 2008
+\star Association for Computing Machinery
+  International Collegiate Programming Contest,
+  World Finalist and Bronze Medallist,
+  2007 and 2008
+\star William Lowell Putnam Mathematical Competition,
+  ranked 93rd percentile, 2008
+\star TopCoder Collegiate Challenge, World Finalist, 2006
+\star Microsoft National Scholarship,
+  granted by the University of Waterloo, 2005--2009
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Volunteer Activities}
+
+\star Event Coordinator and Stepchart Artist,
+  UW Dance Dance Revolution Club, 2012--2014
+\star Assistant to the Laboratory Director,
+  UW Computer Graphics Lab, 2012--2014
+\star Musical Comedy Playwright, \textit{FASS for President},
+  FASS Theatre Company, 2013
+\star Assistant Stage Manager, \textit{Sherlock's Excellent Adventure},
+  KW Little Theatre, 2012
+\star Assistant Technical Director, \textit{FASS of the Titans},
+  FASS Theatre Company, 2011
+\star Problem Setter and Judge,
+  International Olympiad in Informatics, 2010
+\star Volunteer Lecturer,
+  Undergraduate Complex Analysis Seminar, 2009
+\star Problem Setter and Judge,
+  Canadian Computing Competition, 2006--2008
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
