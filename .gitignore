@@ -3,7 +3,6 @@
 /*.aux
 /*.css
 /*.dvi
-/*.html
 /*.idv
 /*.lg
 /*.log
@@ -13,3 +12,7 @@
 /*.spl
 /*.tmp
 /*.xref
+
+/pages
+/partial.html
+/resume.html
