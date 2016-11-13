@@ -1,64 +1,87 @@
 \documentclass[12pt,letterpaper,oneside]{article}
-
+\usepackage{CJKutf8}
 \usepackage{hyperref}
-\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{url}
 \hypersetup{
   colorlinks = false,
   pdfborder = {0 0 0},
 }
-\usepackage{url}
+\long\def\hide#1{}
 
 \ifx\HCode\undefined
-\usepackage{magic}
-\geometry{hmargin=0.98in} % HACK
+
+% Margins.
+\usepackage[margin=1in]{geometry}
+
+% Disable page numbering.
+\pagestyle{empty}
+
+% No indentation.
+\setlength{\parindent}{0pt}
+
+% Section headings.
+\def\section#1{
+\vskip\baselineskip
+\textbf{\uppercase{#1}}\par\nobreak
+}
+
+% Entry headings (such as job headings).
+\def\entry#1{
+\vskip0.5\baselineskip
+\textbf{#1}\par\nobreak
+}
+
+% List formatting.
+\def\simpleitem{\par\nobreak$\bullet\;$}
+\usepackage{enumitem}
+\newenvironment{items}{
+\begin{itemize}[leftmargin=1.5em,topsep=4pt,itemsep=0pt]
+}{\end{itemize}}
+\def\paragraph#1\par{\begin{items}\item[]#1\end{items}}
+\def\star#1\par{\begin{items}\def\star{\item}\star#1\end{items}\par\penalty-1000}
+
 \else
+
+% Formatting for HTML version.
 \def\star#1\par{\begin{itemize}\def\star{\item}\star#1\end{itemize}\par\penalty-1000}
 \def\entry#1{\subsection*{#1}}
 \def\paragraph#1\par{\begin{itemize}\item[]#1\end{itemize}}
 \let\oldsection\section
 \def\section#1{\oldsection*{#1}}
+
 \fi
 
 \begin{document}
-%\unhide
 
-\def\showheader{}
-
+\def\location{Kitchener, Ontario}
 \ifx\HCode\undefined
-\else
-\let\showheader\undefined
-\def\showlastupdate{}
-\fi
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ifx\showheader\undefined
-\else
-\name
-Simon Benjamin Orion Parent
-
+% Header for PDF version.
+\begin{center}
+\Large{\textbf{Simon Benjamin Orion Parent}}
+\end{center}
+\vspace{-1.5\baselineskip} % Hack.
+\begin{multicols}{3}
+\begin{center}
+\location
+\end{center}
+\columnbreak
 \begin{center}
 sboparen@gmail.com
 \end{center}
-\fi
-
-\ifx\showlastupdate\undefined
+\columnbreak
+\begin{center}
+\href{https://sboparen.github.io}{sboparen.github.io}
+\end{center}
+\end{multicols}
 \else
-Last updated June 2014.
+% Header for HTML version.
+\location
+
+Last updated November 2016.
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vskip-0.8em % HACK
 \section{Employment Objective}
 
 \paragraph
@@ -68,123 +91,164 @@ and challenging problems.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Summary of Qualifications}
 
-\star Over twenty years of programming experience with various
+\star Three years of industry experience with various
 languages and platforms
 \star Adaptive to new problem domains; eager to learn new tools
 and methods
-\star Strong mathematical background
-\star Attentive to detail
+\star Strong mathematical background and attention to detail
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Highlighted Technical Skills}
 
-\star Languages: C, Python, C++,
-  Racket, Assembly (ARM, x86), Shell Scripting, Ruby, Java
+\star Languages: Python, Shell Scripting, C, Assembly (ARM, x86),
+  C++, Racket, Ruby, Java
 \star Essential Everyday Tools: Linux, GNU Userland, Git, Vim, SSH, \LaTeX
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Work Experience}
+
+\entry{Route Optimization Team Lead,
+Transit Labs,
+2014/06 -- 2016/05}
+\paragraph{
+I took the route optimization research prototype, and turned it into
+a complete software package, which now serves as the foundation of
+the RideCo product.
+This included the creation of a test suite, design of APIs to
+interface with other components, and packaging for cloud deployment.
+I was also responsible for the oversight and mentoring of the
+developers on the optimization team, contributions to overall system
+architecture, and leadership in planning activities relating to
+optimization features.
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Education}
 
-\entry{Master of Mathematics
-in Computer Science,
-2014}
-University of Waterloo, Waterloo, Ontario
-\\ Thesis:
-\textit{How Programmers Comment When They Think Nobody's Watching}
+\entry{Master of Mathematics in Computer Science,
+University of Waterloo, 2014}
+Thesis:
+\href{https://sboparen.github.io/commenting/}%
+{\textit{How Programmers Comment When They Think Nobody's Watching}}
+\ifx\HCode\undefined
 \\ \url{https://sboparen.github.io/commenting/}
+\else
+\fi
 
-\entry{Bachelor of Mathematics, 2010}
-University of Waterloo, Waterloo, Ontario
-\\ Double Honours Co-op: Computer Science and Pure Mathematics
+\entry{Bachelor of Mathematics, University of Waterloo, 2010}
+Double Honours Co-op: Computer Science and Pure Mathematics
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Co-op Work Experience}
+\section{Internship Work Experience}
 
-\entry{Video Codec and Hardware Programmer}
+\entry{Video Codec Programmer,
 Magnum Semiconductor,
-May 2008 -- August 2008 and January 2009 -- April 2009
-\paragraph
-My main project was the development of
+2008/05--08,
+2009/01--04}
+\paragraph{
+Working independently, I developed
 a reference encoder for the VC-1 video codec standard
 which was designed to exactly match the output of the hardware encoder.
 I assisted in correcting the bugs that were revealed by mismatches
 on test video streams.
+}
 
-\entry{3D Graphics Programmer}
-Side Effects Software,
-January 2007 -- April 2007 and September 2007 -- December 2007
-\paragraph
-My main contribution to the Houdini software was
+\entry{3D Graphics Programmer,
+SideFX,
+2007/01--04,
+2007/09--12}
+\paragraph{
+I made
 major revisions to the algorithms for
 boolean operations on arbitrary surface geometry,
 which improved the numerical stability and
 handling of boundary cases.
+}
 
-\entry{Maintenance Programmer}
-Research In Motion,
-January 2006 -- April 2006
-\paragraph
+\hide{
+\entry{Maintenance Programmer,
+BlackBerry,
+2006/01--04}
+\paragraph{
 As a member of the Customer Response Team,
 I was responsible for fixing bugs in the BlackBerry Enterprise Server
 software and its administrative interface.
+}
+}
+
+\hide{
+\textbf{Web Programmer,}
+University of Waterloo,
+2004/07--08 and
+2005/07--08
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Other Experience}
-
-
-
-\entry{Teaching Assistant for Real-Time Programming}
+\hide{
+%\section{Other Experience}
+%\entry{Teaching Assistant for Real-Time Programming}
 University of Waterloo,
 September 2010 -- August 2012
-\paragraph
+%\paragraph
 Beyond the expected duties,
 I used my knowledge from having taken the course
 to revise the stale course material.
 This was especially necessary since the course had recently
 undergone a major overhaul in transitioning from
 x86 to an ARM architecture.
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Scholarships and Awards}
+\section{Other Activities}
 
-\star NSERC Alexander Graham Bell Canada Graduate Scholarship, 2010--2011
+\star \href{https://ipsc.ksp.sk/2016/results/top10}%
+{Eighth Place (Individual Open Division)},
+Internet Problem Solving Contest,
+2016
+\star Certification Level N4,
+\href{http://jlpt.jp/e/index.html}%
+{Japanese Language Proficiency Test%
+\ifx\HCode\undefined%
+\begin{CJK}{UTF8}{min} (日本語能力試験)\end{CJK}%
+\else%
+\fi%
+}, 2015
+\star Musical Comedy Co-Playwright, \textit{FASS for President},
+  FASS Theatre Company, 2013
+\star Assistant Stage Manager,
+\href{https://web.archive.org/web/20121201015525/http://kwlt.org/Sherlock_s_Excellent_Adventure.195.0.html}%
+{\textit{Sherlock's Excellent Adventure}},
+KW Little Theatre, 2012
+\star Problem Setter and Judge,
+  \href{http://ioi2010.org/index.shtml}%
+{International Olympiad in Informatics, 2010}
+\star NSERC Alexander Graham Bell Canada Graduate Scholarship, 2010
+\star World Finalist and Bronze Medallist,
+  ACM International Collegiate Programming Contest,
+  2007 and 2008
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+\star Event Coordinator and Stepchart Artist,
+  UW Dance Dance Revolution Club, 2012--2014
+\star Assistant to the Laboratory Director,
+  UW Computer Graphics Lab, 2012--2014
+\star Assistant Technical Director, \textit{FASS of the Titans},
+  FASS Theatre Company, 2011
 \star David R. Cheriton Graduate Scholarship, 2010--2012
 \star Ontario Graduate Scholarship, 2011--2012
 \star University of Waterloo President's Graduate Scholarship, 2010--2012
 \star NSERC USRA Industrial Grant for Research and Development, 2008
-\star Association for Computing Machinery
-  International Collegiate Programming Contest,
-  World Finalist and Bronze Medallist,
-  2007 and 2008
+\star Volunteer Lecturer,
+  Undergraduate Complex Analysis Seminar, 2009
+\star Problem Setter and Judge,
+  Canadian Computing Competition, 2006--2008
 \star William Lowell Putnam Mathematical Competition,
   ranked 93rd percentile, 2008
 \star TopCoder Collegiate Challenge, World Finalist, 2006
 \star Microsoft National Scholarship,
   granted by the University of Waterloo, 2005--2009
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Volunteer Activities}
-
-\star Event Coordinator and Stepchart Artist,
-  UW Dance Dance Revolution Club, 2012--2014
-\star Assistant to the Laboratory Director,
-  UW Computer Graphics Lab, 2012--2014
-\star Musical Comedy Playwright, \textit{FASS for President},
-  FASS Theatre Company, 2013
-\star Assistant Stage Manager, \textit{Sherlock's Excellent Adventure},
-  KW Little Theatre, 2012
-\star Assistant Technical Director, \textit{FASS of the Titans},
-  FASS Theatre Company, 2011
-\star Problem Setter and Judge,
-  International Olympiad in Informatics, 2010
-\star Volunteer Lecturer,
-  Undergraduate Complex Analysis Seminar, 2009
-\star Problem Setter and Judge,
-  Canadian Computing Competition, 2006--2008
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
