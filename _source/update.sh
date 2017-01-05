@@ -6,8 +6,8 @@ set -e
 if (git status --porcelain || echo err) | grep -q .; then exit 1; fi
 
 # Build.
-bin/clean.sh
-bin/build.sh
+./clean.sh
+./build.sh
 
 # Copy files.
 cp page.html pages/index.html
