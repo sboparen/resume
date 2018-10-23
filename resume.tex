@@ -1,69 +1,43 @@
-\documentclass[11pt,letterpaper,oneside]{article}
+\documentclass[11pt,letterpaper]{article}
 \usepackage{CJKutf8}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{multicol}
-\usepackage{url}
-\hypersetup{
-  colorlinks = false,
-  pdfborder = {0 0 0},
-}
-\long\def\hide#1{}
 
-\ifx\HCode\undefined
-
-% Margins.
-\usepackage[margin=0.7in]{geometry}
-
-% Disable page numbering.
-\pagestyle{empty}
-
-% No indentation.
-\setlength{\parindent}{0pt}
-
-% Section headings.
-\newlength{\myspacing}
-\setlength{\myspacing}{0.4\baselineskip}
-\def\section#1{
-\vskip1.75\myspacing
-\textbf{\uppercase{#1}}\par\nobreak
-}
-
-% Entry headings (such as job headings).
-\def\entry#1{
-\vskip1.0\myspacing
-\textbf{#1}\par\nobreak
-}
-
-% List formatting.
-\def\simpleitem{\par\nobreak$\bullet\;$}
-\usepackage{enumitem}
-\newenvironment{items}{
-\begin{itemize}[leftmargin=1.5em,topsep=0pt,itemsep=0pt]
-}{\end{itemize}}
-\def\paragraph#1\par{\begin{items}\item[]#1\end{items}}
-\def\star#1\par{\begin{items}\def\star{\item}\star#1\end{items}\par\penalty-1000}
-
+% Support for creating an HTML version.
+\newif\ifpdf \newif\ifhtml \newif\ifnever \neverfalse
+\ifx\HCode\undefined \pdftrue\htmlfalse \else \pdffalse\htmltrue \fi
+\ifhtml
+\let\oldsection\section\def\section#1{\oldsection*{#1}}
+\def\entry#1{\subsection*{#1}}
+\def\paragraph#1\par{%
+\HCode{<ul style="list-style: none;"><li>}#1\HCode{</li></ul>}}
 \else
 
-% Formatting for HTML version.
-\def\star#1\par{\begin{itemize}\def\star{\item}\star#1\end{itemize}\par\penalty-1000}
-\def\entry#1{\subsection*{#1}}
-\def\paragraph#1\par{\HCode{<div class="nobullet">}
-\begin{itemize}\item[]#1\end{itemize}\HCode{</div>}}
-\let\oldsection\section
-\def\section#1{\oldsection*{#1}}
+% Basic page style.
+\usepackage[margin=0.7in]{geometry}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% Heading style.
+\newlength{\myspacing}\setlength{\myspacing}{0.4\baselineskip}
+\def\section#1{\vskip1.75\myspacing\textbf{\uppercase{#1}}\par\nobreak}
+\def\entry#1{\vskip1.0\myspacing\textbf{#1}\par\nobreak}
+
+% List style.
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.5em,topsep=0pt,itemsep=0pt}
+\def\paragraph#1\par{\begin{itemize}\item[]#1\end{itemize}}
 
 \fi
-
 \begin{document}
 
-\def\location{Kitchener, Ontario}
-\ifx\HCode\undefined
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Header for PDF version.
-\multicolsep=2pt
+\def\location{Kitchener, Ontario}
+\ifpdf
 \begin{center}
 {\Large{\textbf{Simon Benjamin Orion Parent}}}
-\begin{multicols}{3}
+\multicolsep=2pt\begin{multicols}{3}
 {\location}
 \columnbreak
 {sboparen@gmail.com}
@@ -72,8 +46,11 @@
 \end{multicols}
 \end{center}
 \vfill
-\else
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Header for HTML version.
+\ifhtml
 \location
 
 Last updated June 2018.
@@ -81,21 +58,28 @@ Last updated June 2018.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Summary of Qu\kern -0.5ptalifications}
-
-\star Three years of experience leading software projects
+\begin{itemize}
+\item Three years of experience leading software projects
 using various languages and platforms
-\star Adaptive to new problem domains;
+\item Adaptive to new problem domains;
 eager to learn new tools and methods
-\star Strong mathematical background and attention to detail
+\item Strong mathematical background and attention to detail
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Highlighted Technical Skills}
+\begin{itemize}
 
-\star Languages: Python, Shell Scripting, C, Assembly (ARM, x86),
-  C++, Racket, Ruby, Java
-\star Essential Everyday Tools: Linux, GNU Userland, Git, Vim, SSH,
- \LaTeX, \href{https://dwm.suckless.org/}{DWM},
- \href{https://st.suckless.org/}{ST}
+\item Languages:
+Python, Shell Scripting, C, Assembly (ARM, x86),
+C++, Racket, Ruby, Java
+
+\item Essential Everyday Tools:
+Linux, GNU Userland, Git, Vim, SSH, \LaTeX,
+\href{https://dwm.suckless.org/}{DWM},
+\href{https://st.suckless.org/}{ST}
+
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Project Leadership Experience}
@@ -129,8 +113,7 @@ which included replacing legacy code.
 
 \entry{Video Codec Programmer Intern,
 Magnum Semiconductor,
-2008/05--08, 2009/01--04
-}
+2008/05--08, 2009/01--04}
 \paragraph{
 Using the official specification and little else,
 I was the sole developer of a software video encoder for the
@@ -143,8 +126,7 @@ their encoder.
 
 \entry{3D Graphics Programmer Intern,
 SideFX,
-2007/01--04, 2007/09--12
-}
+2007/01--04, 2007/09--12}
 \paragraph{
 I was given free reign to tackle the unreliability plaguing the
 tool for performing boolean operations on arbitrary surface geometry.
@@ -158,68 +140,64 @@ numerical stability and the handling of boundary cases.
 
 \entry{Master of Mathematics in Computer Science,
 University of Waterloo, 2014}
-\ifx\HCode\undefined
-\else
-Thesis:
-\fi
+\ifhtml Thesis: \fi
 \href{https://sboparen.github.io/commenting/}%
-{\textit{How Programmers Comment When They Think Nobody's Watching}}
-\ifx\HCode\undefined
-\hfill
-\texttt{sboparen.github.io/thesis}
-\else
-\fi
+{\textit{How Programmers Comment When They Think Nobody's Watching}
+\ifpdf\hfill\texttt{sboparen.github.io/thesis}\fi}
 
 \entry{Bachelor of Mathematics, University of Waterloo, 2010}
-Double Honours Co-op: Computer Science (97.63 average) and
-Pure Mathematics (97.20 average)
+Double Honours Co-op: Computer Science (97.63 average)
+and Pure Mathematics (97.20 average)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Other Activities}
+\begin{itemize}
 
-\star Certification Level N2 (92nd percentile),
+\def\jlpt{%
+\ifpdf\begin{CJK}{UTF8}{min}日本語能力試験\end{CJK}%
+\else\HCode{&\#26085;&\#26412;&\#35486;&\#33021;&\#21147;&\#35430;&\#39443;}\fi%
+}
+\item Certification Level N2 (92nd percentile),
 \href{https://jlpt.jp/e/about/levelsummary.html}%
-{Japanese-Language Proficiency Test%
-\ifx\HCode\undefined%
-\begin{CJK}{UTF8}{min} (日本語能力試験)\end{CJK}%
-\else%
-{} (\HCode{&\#26085;&\#26412;&\#35486;&\#33021;&\#21147;&\#35430;&\#39443;})%
-\fi%
-}, 2017
+{Japanese-Language Proficiency Test (\jlpt)}, 2017
 
-\star System Administrator and Stepchart Artist,
-  UW Dance Dance Revolution Club, 2012 -- Present
+\item System Administrator and Stepchart Artist,
+UW Dance Dance Revolution Club, 2012 -- Present
 
-\star Eighth Place (Individual Open Division),
+\item Eighth Place (Individual Open Division),
 Internet Problem Solving Contest,
 \href{https://ipsc.ksp.sk/2016/results/top10}{2016},
 \href{https://ipsc.ksp.sk/2017/results/top10}{2017}
 
-\star Musical Comedy Co-Playwright, \textit{FASS for President},
-  FASS Theatre Company, 2013
+\ifhtml
+\item Sixth Place,
+\href{https://adventofcode.com/2017/leaderboard}{Advent of Code, 2017}
+\fi
 
-\ifx\HCode\undefined
-\else
-\star Assistant Stage Manager,
-\href{https://web.archive.org/web/20121201015525/http://kwlt.org/Sherlock_s_Excellent_Adventure.195.0.html}%
+\item Musical Comedy Co-Playwright,
+\textit{FASS for President}, FASS Theatre Company, 2013
+
+\ifhtml
+\item Assistant Stage Manager,
+\href{https://web.archive.org/web/20121201015525/%
+http://kwlt.org/Sherlock_s_Excellent_Adventure.195.0.html}%
 {\textit{Sherlock's Excellent Adventure}},
 KW Little Theatre, 2012
 \fi
 
-\star Problem Setter and Judge,
-  \href{http://ioi2010.org/index.shtml}%
+\item Problem Setter and Judge,
+\href{http://ioi2010.org/index.shtml}%
 {International Olympiad in Informatics, 2010}
 
-\star World Finalist and Bronze Medallist,
-  ACM International Collegiate Programming Contest,
-  2007, 2008
+\item World Finalist and Bronze Medallist,
+ACM International Collegiate Programming Contest, 2007, 2008
+
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-%\section{Other Experience}
-\hide{
+%\nevertrue
+\ifnever\pagebreak\section{Archived Experience}
+
 \entry{Maintenance Programmer Intern,
 BlackBerry,
 2006/01--04}
@@ -228,37 +206,32 @@ As a member of the Customer Response Team,
 I was responsible for fixing bugs in the BlackBerry Enterprise Server
 software and its administrative interface.
 }
-}
 
-\hide{
-\textbf{Web Programmer,}
+\entry{Web Programmer Intern,
 University of Waterloo,
-2004/07--08 and
-2005/07--08
-}
-}
+2004/07--08, 2005/07--08}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-\star Assistant to the Laboratory Director,
-  UW Computer Graphics Lab, 2012--2014
-\star Assistant Technical Director, \textit{FASS of the Titans},
-  FASS Theatre Company, 2011
-\star NSERC Alexander Graham Bell Canada Graduate Scholarship, 2010
-\star David R. Cheriton Graduate Scholarship, 2010--2012
-\star Ontario Graduate Scholarship, 2011--2012
-\star University of Waterloo President's Graduate Scholarship, 2010--2012
-\star NSERC USRA Industrial Grant for Research and Development, 2008
-\star Volunteer Lecturer,
-  Undergraduate Complex Analysis Seminar, 2009
-\star Problem Setter and Judge,
-  Canadian Computing Competition, 2006--2008
-\star William Lowell Putnam Mathematical Competition,
-  ranked 93rd percentile, 2008
-\star TopCoder Collegiate Challenge, World Finalist, 2006
-\star Microsoft National Scholarship,
-  granted by the University of Waterloo, 2005--2009
-}
+\section{Archived Activities}
+\begin{itemize}
+\item Assistant to the Laboratory Director,
+UW Computer Graphics Lab, 2012--2014
+\item Assistant Technical Director, \textit{FASS of the Titans},
+FASS Theatre Company, 2011
+\item NSERC Alexander Graham Bell Canada Graduate Scholarship, 2010
+\item David R. Cheriton Graduate Scholarship, 2010--2012
+\item Ontario Graduate Scholarship, 2011--2012
+\item University of Waterloo President's Graduate Scholarship, 2010--2012
+\item NSERC USRA Industrial Grant for Research and Development, 2008
+\item Volunteer Lecturer,
+Undergraduate Complex Analysis Seminar, 2009
+\item Problem Setter and Judge,
+Canadian Computing Competition, 2006--2008
+\item William Lowell Putnam Mathematical Competition,
+ranked 93rd percentile, 2008
+\item TopCoder Collegiate Challenge, World Finalist, 2006
+\item Microsoft National Scholarship,
+granted by the University of Waterloo, 2005--2009
+\end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
 \end{document}

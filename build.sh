@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-pdflatex -halt-on-error -shell-escape resume
+pdflatex -halt-on-error resume
 ./strip_pdf.sh resume.pdf
 htlatex resume "html,NoFonts,-css" '' '' "-halt-on-error"
 sed -i resume.html -e 's/<!--[^>]*-->//g'
